@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace Devscast\Maxicash\Tests;
 
-use PHPUnit\Framework\TestCase;
 use Devscast\Maxicash\Credential;
+use InvalidArgumentException;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class CredentialTest.
@@ -24,7 +25,7 @@ final class CredentialTest extends TestCase
 
     public function testConstructorEmptyMerchantId(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Merchant ID cannot be empty');
 
         new Credential('', 'merchant_key');
@@ -32,7 +33,7 @@ final class CredentialTest extends TestCase
 
     public function testConstructorEmptyMerchantKey(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Merchant Key or password cannot be empty');
 
         new Credential('merchant_id', '');

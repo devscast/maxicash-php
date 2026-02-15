@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Devscast\Maxicash;
 
+use SensitiveParameter;
 use Webmozart\Assert\Assert;
 
 /**
@@ -25,8 +26,10 @@ final readonly class Credential
      *                            the merchant on the platform This parameter is compulsory
      */
     public function __construct(
-        #[\SensitiveParameter] string $merchantId,
-        #[\SensitiveParameter] string $merchantKey,
+        #[SensitiveParameter]
+        string $merchantId,
+        #[SensitiveParameter]
+        string $merchantKey,
     ) {
         Assert::notEmpty($merchantId, 'Merchant ID cannot be empty');
         Assert::notEmpty($merchantKey, 'Merchant Key or password cannot be empty');

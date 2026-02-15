@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace Devscast\Maxicash\Tests;
 
-use PHPUnit\Framework\TestCase;
 use Devscast\Maxicash\Credential;
-use Devscast\Maxicash\PaymentEntry;
-use Devscast\Maxicash\Data\PayType;
 use Devscast\Maxicash\Data\Currency;
 use Devscast\Maxicash\Data\Language;
+use Devscast\Maxicash\Data\PayType;
+use Devscast\Maxicash\PaymentEntry;
+use InvalidArgumentException;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class PaymentEntryTest.
@@ -22,7 +23,7 @@ final class PaymentEntryTest extends TestCase
     {
         $credential = new Credential('merchant_id', 'merchant_key');
 
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Amount must be greater than 0');
 
         new PaymentEntry(
@@ -38,7 +39,7 @@ final class PaymentEntryTest extends TestCase
     {
         $credential = new Credential('merchant_id', 'merchant_key');
 
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Reference must not be empty');
 
         new PaymentEntry(
@@ -54,7 +55,7 @@ final class PaymentEntryTest extends TestCase
     {
         $credential = new Credential('merchant_id', 'merchant_key');
 
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Accept url must be a valid url');
 
         new PaymentEntry(
@@ -70,7 +71,7 @@ final class PaymentEntryTest extends TestCase
     {
         $credential = new Credential('merchant_id', 'merchant_key');
 
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Decline url must be a valid url');
 
         new PaymentEntry(
@@ -82,7 +83,7 @@ final class PaymentEntryTest extends TestCase
         );
     }
 
-    public function testPost()
+    public function testPost(): void
     {
         $paymentEntry = new PaymentEntry(
             credential: new Credential('merchantId', 'merchantKey'),
@@ -112,13 +113,13 @@ final class PaymentEntryTest extends TestCase
             'accepturl' => 'http://example.com/accept',
             'declineurl' => 'http://example.com/decline',
             'cancelurl' => 'http://example.com/cancel',
-            'notifyurl' => 'http://example.com/notify'
+            'notifyurl' => 'http://example.com/notify',
         ];
 
         $this->assertEquals($expectedResult, $paymentEntry->post());
     }
 
-    public function testGet()
+    public function testGet(): void
     {
         $paymentEntry = new PaymentEntry(
             credential: new Credential('merchantId', 'merchantKey'),

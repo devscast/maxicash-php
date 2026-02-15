@@ -7,6 +7,7 @@ namespace Devscast\Maxicash;
 use Devscast\Maxicash\Data\Currency;
 use Devscast\Maxicash\Data\Language;
 use Devscast\Maxicash\Data\PayType;
+use JsonException;
 use Webmozart\Assert\Assert;
 
 /**
@@ -63,6 +64,7 @@ final readonly class PaymentEntry
 
     /**
      * used when gateway is set to HTTP_POST.
+     * @return array<string, int|string|null>
      */
     public function post(): array
     {
@@ -112,7 +114,7 @@ final readonly class PaymentEntry
     /**
      * used when gateway is set to JSON.
      *
-     * @throws \JsonException
+     * @throws JsonException
      */
     public function json(): string
     {

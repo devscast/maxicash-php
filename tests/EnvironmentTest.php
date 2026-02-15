@@ -2,8 +2,8 @@
 
 namespace Devscast\Maxicash\Tests;
 
-use PHPUnit\Framework\TestCase;
 use Devscast\Maxicash\Environment;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class EnvironmentTest.

@@ -2,21 +2,20 @@
 
 declare(strict_types=1);
 
+use PhpCsFixer\Fixer\Import\NoUnusedImportsFixer;
 use Symplify\EasyCodingStandard\Config\ECSConfig;
-use Symplify\EasyCodingStandard\ValueObject\Set\SetList;
 
-return function (ECSConfig $ecsConfig): void {
-    $ecsConfig->paths([
+return ECSConfig::configure()
+    ->withPaths([
         __DIR__ . '/src',
-    ]);
+        __DIR__ . '/tests',
+    ])
 
-    $ecsConfig->sets([
-        SetList::PSR_12,
-        SetList::COMMON,
-        SetList::CLEAN_CODE
-    ]);
-
-    $ecsConfig->skip([
-        PhpCsFixer\Fixer\FunctionNotation\MethodArgumentSpaceFixer::class
-    ]);
-};
+    ->withRules([
+        NoUnusedImportsFixer::class,
+    ])
+    ->withPreparedSets(
+        psr12: true,
+        common: true,
+        cleanCode: true,
+    );
